@@ -1,1 +1,1 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+run `yarn run dev` to launch the application in localhost:3000
