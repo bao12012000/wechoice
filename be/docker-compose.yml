@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+
+  pgdb:
+    image: postgres
+    container_name: wechoice
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123!@#
+    volumes:
+      - ./.data/postgres:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-wechoice
+    ports:
+      - 8082:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@test.com
+      PGADMIN_DEFAULT_PASSWORD: 123!@#

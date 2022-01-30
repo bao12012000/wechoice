@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "histories",
+  "info": {
+    "singularName": "history",
+    "pluralName": "histories",
+    "displayName": "History"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sender": {
+      "type": "string",
+      "required": true
+    },
+    "receiver": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "integer"
+    },
+    "transactionHash": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "blockHash": {
+      "type": "string",
+      "required": true
+    },
+    "blockNumber": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

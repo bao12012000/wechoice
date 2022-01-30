@@ -1,0 +1,112 @@
+
+//  https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest-api.html#api-parameters
+{
+  "data": [
+      {
+          "id": 1,
+          "attributes": {
+              "title": "PROTECTION FROM VIOLENCE IS EVERY CHILD'S RIGHT",
+              "createdAt": "2022-01-28T13:49:38.542Z",
+              "updatedAt": "2022-01-28T14:34:32.152Z",
+              "publishedAt": "2022-01-28T13:52:48.334Z",
+              "embedUrl": null,
+              "sortDescription": "As the COVID-19 pandemic exacerbates the impact of conflict on young people and children, their rights must be protected and their voices must be heard.",
+              "moreDetail": "Every child has the right to grow up free from violence and fear. Thank for your donation",
+              "media": {
+                  "data": {
+                      "id": 1,
+                      "attributes": {
+                          "name": "children.jpeg",
+                          "alternativeText": "children.jpeg",
+                          "caption": "children.jpeg",
+                          "width": 1400,
+                          "height": 1400,
+                          "formats": {
+                              "large": {
+                                  "ext": ".jpeg",
+                                  "url": "/uploads/large_children_a5ce502d61.jpeg",
+                                  "hash": "large_children_a5ce502d61",
+                                  "mime": "image/jpeg",
+                                  "name": "large_children.jpeg",
+                                  "path": null,
+                                  "size": 207.93,
+                                  "width": 1000,
+                                  "height": 1000
+                              },
+                              "small": {
+                                  "ext": ".jpeg",
+                                  "url": "/uploads/small_children_a5ce502d61.jpeg",
+                                  "hash": "small_children_a5ce502d61",
+                                  "mime": "image/jpeg",
+                                  "name": "small_children.jpeg",
+                                  "path": null,
+                                  "size": 67.54,
+                                  "width": 500,
+                                  "height": 500
+                              },
+                              "medium": {
+                                  "ext": ".jpeg",
+                                  "url": "/uploads/medium_children_a5ce502d61.jpeg",
+                                  "hash": "medium_children_a5ce502d61",
+                                  "mime": "image/jpeg",
+                                  "name": "medium_children.jpeg",
+                                  "path": null,
+                                  "size": 132.19,
+                                  "width": 750,
+                                  "height": 750
+                              },
+                              "thumbnail": {
+                                  "ext": ".jpeg",
+                                  "url": "/uploads/thumbnail_children_a5ce502d61.jpeg",
+                                  "hash": "thumbnail_children_a5ce502d61",
+                                  "mime": "image/jpeg",
+                                  "name": "thumbnail_children.jpeg",
+                                  "path": null,
+                                  "size": 9.37,
+                                  "width": 156,
+                                  "height": 156
+                              }
+                          },
+                          "hash": "children_a5ce502d61",
+                          "ext": ".jpeg",
+                          "mime": "image/jpeg",
+                          "size": 354.74,
+                          "url": "/uploads/children_a5ce502d61.jpeg",
+                          "previewUrl": null,
+                          "provider": "local",
+                          "provider_metadata": null,
+                          "createdAt": "2022-01-28T13:52:31.754Z",
+                          "updatedAt": "2022-01-28T13:52:31.754Z"
+                      }
+                  }
+              },
+              "histories": {
+                  "data": []
+              },
+              "user": {
+                  "data": {
+                      "id": 1,
+                      "attributes": {
+                          "username": "UNICEF",
+                          "email": "cdendulk@unicef.org",
+                          "provider": "local",
+                          "confirmed": true,
+                          "blocked": false,
+                          "createdAt": "2022-01-28T13:30:09.310Z",
+                          "updatedAt": "2022-01-28T13:35:27.845Z",
+                          "address": "hx5a05b58a25a1e5ea0f1d5715e1f655dffc1fb30a"
+                      }
+                  }
+              }
+          }
+      }
+  ],
+  "meta": {
+      "pagination": {
+          "page": 1,
+          "pageSize": 25,
+          "pageCount": 1,
+          "total": 1
+      }
+  }
+}
