@@ -4,7 +4,8 @@
   "info": {
     "singularName": "history",
     "pluralName": "histories",
-    "displayName": "History"
+    "displayName": "History",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -34,6 +35,12 @@
     "blockNumber": {
       "type": "string",
       "required": true
+    },
+    "post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::post.post",
+      "inversedBy": "histories"
     }
   }
 }

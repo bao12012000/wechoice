@@ -8,7 +8,7 @@ import axios from 'axios';
 import qs from 'qs';
 import { Toaster } from 'react-hot-toast';
 
-const SERVER_URL = 'http://localhost:1337';
+const SERVER_URL = 'http://188.166.223.9:1337';
 
 function Home() {
   const [address, setAddress] = useState('');
@@ -22,12 +22,12 @@ function Home() {
     }, {
       encodeValuesOnly: true,
     });
-    //const result = (await axios.get(SERVER_URL + `/api/posts?${query}`)).data.data;
-    //setPostData(result);
+    const postResult = (await axios.get(SERVER_URL + `/api/posts?${query}`)).data.data;
+    setPostData(postResult);
   }, [])
   return (
     <div className="container">
-      <div><Toaster/></div>
+      <div><Toaster /></div>
       <Head>
         <title>We Choice</title>
         <link rel="icon" href="/favicon.ico" />
@@ -37,8 +37,8 @@ function Home() {
       </div>
       <main>
         {
-          listPost.map((post, idx) => <div className="post-wrapper">
-            <Post key={idx} userName={post.userName} userAvatar={post.userAvatar} userAddress={post.userAddress} shortDesc={post.shortDesc} moreDetails={post.moreDetails} url={post.url} mediaType={post.mediaType} donateHistory={post.donateHistory} />
+          postData.map((post, idx) => <div className="post-wrapper">
+            <Post key={post.id} postId={post.id} userName={post?.attributes.user.data.attributes.username} userAvatar={post.userAvatar} userAddress={post?.attributes.user.data.attributes.address} shortDesc={post?.attributes.sortDescription} moreDetails={post?.attributes.moreDetail} url={post?.attributes.embedUrl ? post?.attributes.embedUrl : SERVER_URL + post?.attributes.media.data.attributes.url} mediaType={post?.attributes.embedUrl ? 'video' : 'image'} donateHistory={post?.attributes.histories.data} />
           </div>)
         }
       </main>

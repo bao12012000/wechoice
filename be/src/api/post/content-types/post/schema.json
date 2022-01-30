@@ -33,11 +33,6 @@
     "embedUrl": {
       "type": "string"
     },
-    "histories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::history.history"
-    },
     "user": {
       "type": "relation",
       "relation": "manyToOne",
@@ -46,6 +41,12 @@
     },
     "moreDetail": {
       "type": "richtext"
+    },
+    "histories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::history.history",
+      "mappedBy": "post"
     }
   }
 }

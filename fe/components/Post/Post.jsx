@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -22,7 +22,7 @@ import LocalAirportIcon from '@mui/icons-material/LocalAirport';
 import { DataGrid } from '@mui/x-data-grid';
 
 import { transfer } from '../../sdk/iconSDK.js';
-import toast, { Toaster } from 'react-hot-toast';
+// import toast, { Toaster } from 'react-hot-toast';
 
 const iconICX = 'https://s2.coinmarketcap.com/static/img/coins/200x200/2099.png';
 
@@ -39,6 +39,11 @@ const ExpandMore = styled((props) => {
 
 const columns = [
   {
+    field: 'receiver',
+    headerName: 'Receiver Address',
+    width: 450,
+  },
+  {
     field: 'sender',
     headerName: 'Sender Address',
     width: 450,
@@ -49,24 +54,32 @@ const columns = [
     width: 100,
     editable: true,
   },
-  {
-    field: 'message',
-    headerName: 'Message',
-    width: 220,
-    editable: true,
-  },
+
 ];
 
-export const  Post = ({ userName, userAvatar, date, userAddress, shortDesc, moreDetails, url, mediaType="video", donateHistory }) => {
+export const Post = ({ postId, userName, userAvatar, date, userAddress, shortDesc, moreDetails, url, mediaType = "video", donateHistory }) => {
   const [expanded, setExpanded] = useState(false);
+  const [donationData, setDonationData] = useState([]);
   const to = userAddress || 'hxedaf3b2027fbbc0a31f589299c0b34533cd8edac'; //lisa
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const donate = (value) => {
-    transfer({ to:to, value: value});
+
+
+  const donate = async (value, postId) => {
+    let result = await transfer({ to: to, value: value }, postId);
+    setDonationData(prevData => [...prevData, { id: result.id, sender: result.sender, receiver: result.receiver, amount: result.value }])
   }
+
+  useEffect(() => {
+    setDonationData(donateHistory?.map(item => {
+      return {
+        id: item.id, sender: item?.attributes.sender, receiver: item.attributes.receiver, amount: item.attributes.value
+      }
+    }))
+  }, []);
+
 
   return (
     <Card sx={{ maxWidth: 545 }}>
@@ -92,39 +105,39 @@ export const  Post = ({ userName, userAvatar, date, userAddress, shortDesc, more
             image={url}
             alt="Paella dish"
           />
-        }
+      }
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          { shortDesc }
+          {shortDesc}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" sx={{ 'color': '#f34d6a' }} onClick={() => { donate(1) }} >
+        <IconButton aria-label="add to favorites" sx={{ 'color': '#f34d6a' }} onClick={() => { donate(1, postId) }} >
           <FavoriteIcon />
           <span className="amount">1</span>
           <img width="12px" height="12px" src={iconICX} alt='icx'></img>
         </IconButton>
-        <IconButton aria-label="flower" sx={{ 'color': '#ed3bef' }} onClick={() => { donate(3) }}>
+        <IconButton aria-label="flower" sx={{ 'color': '#ed3bef' }} onClick={() => { donate(3, postId) }}>
           <LocalFloristIcon />
           <span className="amount">3</span>
           <img width="12px" height="12px" src={iconICX} alt='icx'></img>
         </IconButton>
-        <IconButton aria-label="flower" sx={{ 'color': '#811fd9' }} onClick={() => { donate(5) }}>
+        <IconButton aria-label="flower" sx={{ 'color': '#811fd9' }} onClick={() => { donate(5, postId) }}>
           <LocalBarIcon />
           <span className="amount">5</span>
           <img width="12px" height="12px" src={iconICX} alt='icx'></img>
         </IconButton>
-        <IconButton aria-label="flower" sx={{ 'color': '#723102' }} onClick={() => { donate(10) }}>
+        <IconButton aria-label="flower" sx={{ 'color': '#723102' }} onClick={() => { donate(10, postId) }}>
           <LocalCafeIcon />
           <span className="amount">10</span>
           <img width="12px" height="12px" src={iconICX} alt='icx'></img>
         </IconButton>
-        <IconButton aria-label="flower" sx={{ 'color': '#f9ba43' }} onClick={() => { donate(50) }}>
+        <IconButton aria-label="flower" sx={{ 'color': '#f9ba43' }} onClick={() => { donate(50, postId) }}>
           <EmojiEventsIcon />
           <span className="amount">50</span>
           <img width="12px" height="12px" src={iconICX} alt='icx'></img>
         </IconButton>
-        <IconButton aria-label="flower" sx={{ 'color': '#4372f9' }} onClick={() => { donate(100) }}>
+        <IconButton aria-label="flower" sx={{ 'color': '#4372f9' }} onClick={() => { donate(100, postId) }}>
           <LocalAirportIcon />
           <span className="amount">100</span>
           <img width="12px" height="12px" src={iconICX} alt='icx'></img>
@@ -144,20 +157,20 @@ export const  Post = ({ userName, userAvatar, date, userAddress, shortDesc, more
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            { moreDetails }
+            {moreDetails}
           </Typography>
           <Typography paragraph>
             Donation History
           </Typography>
           <div style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            rows={donateHistory}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            disableSelectionOnClick
-          />
-    </div>
+            <DataGrid
+              rows={donationData}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+              disableSelectionOnClick
+            />
+          </div>
         </CardContent>
       </Collapse>
       <style jsx>{`
